@@ -1,0 +1,45 @@
+
+{% extends "base.html" %}
+{% block title %}Chat{% endblock %}
+{% block content %}
+<div class="container">
+  <h1>🎤 Chat Musical</h1>
+  <div id="chat" class="chat-box">
+    {% for linha in historico %}
+      {{ linha|safe }}
+    {% endfor %}
+  </div>
+<form method="POST" id="formulario">
+  <input type="text" id="mensagem" name="mensagem" placeholder="Digite sua mensagem..." required>
+  <button type="submit" name="enviar">Enviar</button>
+</form>
+
+<form method="POST" style="margin-top: 10px;">
+  <button type="submit" name="encerrar" style="background-color: #555;">Encerrar Sessão</button>
+</form>
+
+</div>
+
+<script>
+  const socket = io();
+  const chatBox = document.getElementById('chat');
+  const input = document.getElementById('mensagem');
+
+  input.focus();
+  const scrollToBottom = () => { chatBox.scrollTop = chatBox.scrollHeight; };
+
+  socket.on("nova_mensagem", data => {
+    const novaLinha = document.createElement("div");
+    novaLinha.innerHTML = data.html;
+    chatBox.appendChild(novaLinha);
+    scrollToBottom();
+  });
+
+  document.getElementById("formulario").addEventListener("submit", () => {
+    setTimeout(() => {
+      input.value = "";
+      input.focus();
+    }, 100);
+  });
+</script>
+{% endblock %}

@@ -1,0 +1,25 @@
+{% extends "base.html" %}
+{% block title %}Início{% endblock %}
+{% block content %}
+  <div class="container">
+    <h1>Chat Musical 🎶</h1>
+    <p style="text-align: center;">Fale com nosso bot sobre Hip Hop, Pop, MPB ou Gospel!</p>
+
+    <div style="display: grid; grid-template-columns: repeat(auto-fit, minmax(150px, 1fr)); gap: 20px; margin: 40px 0;">
+      <div style="text-align: center;">
+        <img src="{{ url_for('static', filename='images/hiphop.jpg') }}" alt="Hip Hop" style="width:100px;">
+      </div>
+      <div style="text-align: center;">
+        <img src="{{ url_for('static', filename='images/pop.jpg') }}" alt="Pop" style="width:100px;">
+      </div>
+      <div style="text-align: center;">
+        <img src="{{ url_for('static', filename='images/mpb.jpg') }}" alt="MPB" style="width:100px;">
+      </div>
+      <div style="text-align: center;">
+        <img src="{{ url_for('static', filename='images/gospel.jpg') }}" alt="Gospel" style="width:100px;">
+      </div>
+    </div>
+
+    <button onclick="window.location.href='/chat'">Iniciar Conversa</button>
+  </div>
+{% endblock %}
